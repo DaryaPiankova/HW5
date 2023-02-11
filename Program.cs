@@ -1,32 +1,56 @@
-﻿void InputArray(double[] array)
-{   
-    int begin=1, end=100;
-  for (int i = 0; i < array.Length; i++)
-    array[i] = Math.Round(new Random().NextDouble() * (end - begin) + begin, 2);
-}
-
-
-double cmp(double[] array)
+﻿void InputArray(int[] array)
 {
-    double max=array[0], min=array[0];
-    double result;
+  for (int i = 0; i < array.Length; i++)
+    array[i] = new Random().Next(1, 32); 
+}
+ 
+
+int[] ReleaseArray1(int[] array)
+{
+    int [] arr2=new int[array.Length];
   for(int i=0; i<array.Length; i++){
-    if(array[i]>max){
-        max=array[i];
-    }
-    if(array[i]<min){
-        min=array[i];
+    if(array[i]%2!=0){
+        arr2[i]=array[i];
     }
   }
-  result =max-min;
- return result;
+  return arr2;
 }
 
 
+int[] ReleaseArray2(int[] array)
+{
+    int [] arr2=new int[array.Length];
+  for(int i=0; i<array.Length; i++){
+    if(array[i]%2==0){
+        arr2[i]=array[i];
+    }
+  }
+  return arr2;
+}
+
+string comp(int [] arr1, int[] arr2){
+    int sz1=0;
+    int sz2=0;
+    for(int i=0; i<arr1.Length; i++){
+        if(arr1[i]!=0){
+            sz1++;
+        }
+         if(arr2[i]!=0){
+            sz2++;
+        }
+    }
+    if(sz1>sz2)return "No";
+    return "Yes";
+} 
+
 Console.Clear();
-Console.Write("Введите кол-во элементов: ");
+Console.Write("Введите кол-во элементов от 1 до 100: ");
 int n = Convert.ToInt32(Console.ReadLine());
-double[] array = new double[n];
+int[] array = new int[n];
 InputArray(array);
 Console.WriteLine($"Начальный массив: [{string.Join(", ", array)}]");
-Console.WriteLine(cmp(array));
+int[] array2= ReleaseArray1(array);
+Console.WriteLine($"Массив троек: [{string.Join(", ", array2)}]");
+int[] array3= ReleaseArray2(array);
+Console.WriteLine($"Массив четверок: [{string.Join(", ", array3)}]");
+Console.WriteLine(comp(array2, array3));
