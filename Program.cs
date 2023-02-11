@@ -1,17 +1,15 @@
 ﻿void InputArray(int[] array)
 {
   for (int i = 0; i < array.Length; i++)
-    array[i] = new Random().Next(100, 1000);
+    array[i] = new Random().Next(-9, 10); // [-9, 9]
 }
 
 
 int sum(int[] array)
 {
     int count=0;
-  foreach (int element in array)
-  {
-    if (element%2==0)
-      count++;
+  for(int i=1; i<array.Length; i+=2){
+    count+=array[i];
   }
   return count;
 }
