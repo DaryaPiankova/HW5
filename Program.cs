@@ -1,24 +1,32 @@
-﻿void InputArray(int[] array)
-{
+﻿void InputArray(double[] array)
+{   
+    int begin=1, end=100;
   for (int i = 0; i < array.Length; i++)
-    array[i] = new Random().Next(-9, 10); // [-9, 9]
+    array[i] = Math.Round(new Random().NextDouble() * (end - begin) + begin, 2);
 }
 
 
-int sum(int[] array)
+double cmp(double[] array)
 {
-    int count=0;
-  for(int i=1; i<array.Length; i+=2){
-    count+=array[i];
+    double max=array[0], min=array[0];
+    double result;
+  for(int i=0; i<array.Length; i++){
+    if(array[i]>max){
+        max=array[i];
+    }
+    if(array[i]<min){
+        min=array[i];
+    }
   }
-  return count;
+  result =max-min;
+ return result;
 }
 
 
 Console.Clear();
 Console.Write("Введите кол-во элементов: ");
 int n = Convert.ToInt32(Console.ReadLine());
-int[] array = new int[n];
+double[] array = new double[n];
 InputArray(array);
 Console.WriteLine($"Начальный массив: [{string.Join(", ", array)}]");
-Console.WriteLine(sum(array));
+Console.WriteLine(cmp(array));
